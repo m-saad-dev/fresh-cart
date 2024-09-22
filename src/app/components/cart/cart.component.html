@@ -46,7 +46,7 @@
         @if (cart.products?.length) {
             <div class="row mt-4">
                 <div class="col-12">
-                    <button [routerLink]="['/cart/place-order', cart._id]" class="btn btn-main" > Place Order </button>
+                    <button [routerLink]="['/place-order', cart._id]" class="btn btn-main" > Place Order </button>
                 </div>
             </div>
         }

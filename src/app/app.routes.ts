@@ -31,8 +31,8 @@ export const routes: Routes = [
             {path: 'fav-products', loadComponent: () => import('./components/fav-products/fav-products.component').then((component)=> component.FavProductsComponent)},
             {path: 'product-details/:id', loadComponent: () => import('./components/product-details/product-details.component').then((component)=> component.ProductDetailsComponent)},
             {path: 'cart', loadComponent: () => import('./components/cart/cart.component').then((component)=> component.CartComponent)},
-            {path: 'place-order', loadComponent: () => import('./components/place-order/place-order.component').then((component)=> component.PlaceOrderComponent)},
-            {path: 'all-orders', loadComponent: () => import('./components/all-orders/all-orders.component').then((component)=> component.AllOrdersComponent)},
+            {path: 'place-order/:cartId', loadComponent: () => import('./components/place-order/place-order.component').then((component)=> component.PlaceOrderComponent)},
+            {path: 'allorders', loadComponent: () => import('./components/all-orders/all-orders.component').then((component)=> component.AllOrdersComponent)},
         ]
     },
     {path: '**', loadComponent: () => import('./components/not-found/not-found.component').then((component)=> component.NotFoundComponent)},
