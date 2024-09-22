@@ -1,0 +1,100 @@
+<section class="bg-main-light shadow py-5 rounded-4 text-center mx-auto w-75">
+    <h1 class="h2 text-main mb-5"> Register Now</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="submit()">
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            <div class="col-3 ps-4 ms-4 text-start">
+                <label for="name" class="text-capitalize"> name:</label>
+            </div>
+            <div class="col-8">
+                <input formControlName="name" type="text" id="name" class="form-control d-inline-block" 
+                [ngClass]="{
+                    'is-valid': registerForm.get('name')?.valid && (registerForm.get('name')?.touched || registerForm.get('name')?.touched),
+                    'is-invalid': registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.touched),
+                }">
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="registerForm" controlName="name"></app-form-error-msgs>
+            </div>
+        </div>
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            <div class="col-3 ps-4 ms-4 text-start ">
+                <label for="email" class="text-capitalize"> email:</label>
+            </div>
+            <div class="col-8">
+                <input formControlName="email" type="email" id="email" class="form-control d-inline-block" 
+                [ngClass]="{
+                    'is-valid': registerForm.get('email')?.valid && (registerForm.get('email')?.touched || registerForm.get('email')?.touched),
+                    'is-invalid': registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.touched),
+                }">
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="registerForm" controlName="email"></app-form-error-msgs>
+            </div>
+        </div>
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            <div class="col-3 ps-4 ms-4 text-start ">
+                <label for="phone" class="text-capitalize"> phone:</label>
+            </div>
+            <div class="col-8">
+                <input formControlName="phone" type="tel" id="phone" class="form-control d-inline-block" 
+                [ngClass]="{
+                    'is-valid': registerForm.get('phone')?.valid && (registerForm.get('phone')?.touched || registerForm.get('phone')?.touched),
+                    'is-invalid': registerForm.get('phone')?.invalid && (registerForm.get('phone')?.touched || registerForm.get('phone')?.touched),
+                }">
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="registerForm" controlName="phone"></app-form-error-msgs>
+            </div>
+        </div>
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            
+            <div class="col-3 ps-4 ms-4 text-start ">
+                <label for="password" class="text-capitalize"> password:</label>
+            </div>
+            <div class="col-8">
+                <input formControlName="password" type="password" id="password" class="form-control d-inline-block" 
+                [ngClass]="{
+                    'is-valid': registerForm.get('password')?.valid && (registerForm.get('password')?.touched || registerForm.get('password')?.touched),
+                    'is-invalid': registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.touched),
+                }">
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="registerForm" controlName="password"></app-form-error-msgs>
+            </div>
+        </div>
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            
+            <div class="col-3 ps-4 ms-4 text-start ">
+                <label for="rePassword"> rePassword:</label>
+            </div>
+            <div class="col-8">
+                <input formControlName="rePassword" type="password" id="rePassword" class="form-control d-inline-block" 
+                [ngClass]="{
+                    'is-valid': registerForm.get('rePassword')?.valid && (registerForm.get('rePassword')?.touched || registerForm.get('rePassword')?.touched),
+                    'is-invalid': registerForm.get('rePassword')?.invalid && (registerForm.get('rePassword')?.touched || registerForm.get('rePassword')?.touched),
+                }">
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="registerForm" controlName="rePassword"></app-form-error-msgs>
+            </div>
+        </div>
+        <button type="submit" class="btn-main text-capitalize mx-auto d-block" [disabled]="isLoading"> 
+            @if (isLoading) {
+                <i class="fas fa-spinner fa-spin"></i>
+            }
+            @else {
+                submit
+            }
+        </button>
+    </form>
+    @if (errMsg || successMsg) {
+        <div class="row justify-content-center">
+            <div [ngClass]="{
+                'alert alert-danger': errMsg,
+                'rounded-4 bg-success': successMsg,
+                }"  class=" w-50 m-2 p-1 text-white">
+                <p class="m-0"> {{ successMsg ?? errMsg}}</p>
+            </div>
+        </div>
+    }
+</section>

@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg py-4 mb-4 fixed-top bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand text-uppercase" routerLink="home">
+            <img  src="./assets/images/freshcart-logo.svg" alt="freshcart-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item me-3">
+                    <a class="nav-link p-2 text-uppercase"  routerLinkActive="active-link" routerLink="home">{{ "navbar.home" | translate }}</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link p-2 text-uppercase" routerLinkActive="active-link" routerLink="products">{{ "navbar.products" | translate }}</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link p-2 text-uppercase" routerLinkActive="active-link" routerLink="categories">{{ "navbar.categories" | translate }}</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link p-2 text-uppercase" routerLinkActive="active-link" routerLink="brands">{{ "navbar.brands" | translate }}</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav " 
+                [ngClass]="{
+                    'ms-auto': _ProjectTranslateService.getCurrentLang() == 'en',
+                    'me-auto': _ProjectTranslateService.getCurrentLang() == 'ar'
+                }"
+            >
+                <!-- lang -->
+                <li class="nav-item dropdown w-100">
+                    <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ "navbar.lang" | translate }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item cursor-pointer" 
+                                (click)="updateLang('en')" 
+                                [ngClass]="{
+                                    'active-link': _ProjectTranslateService.getCurrentLang() == 'en',
+                                }"
+                            >
+                                {{ "navbar.en" | translate }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item cursor-pointer" 
+                                (click)="updateLang('ar')" 
+                                [ngClass]="{
+                                    'active-link': _ProjectTranslateService.getCurrentLang() == 'ar'
+                                }"
+                            >
+                                {{ "navbar.ar" | translate }}
+                            </a>
+                        </li>
+                    </ul>
+                  </li>
+          
+                <li class="nav-item me-2">
+                    <a class="nav-link p-2 px-3 text-uppercase cursor-pointer" target="_self" routerLink="/fav-products">
+                        <i class="fa-solid fa-heart"></i>
+                    </a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link p-2 text-uppercase position-relative" target="_self" routerLink="/cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ this._CartService.cartItemsCount() }}
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link p-2 text-uppercase cursor-pointer " style="min-width: 120px;" (click)="_AuthService.signOut()">
+                        {{ "navbar.signout" | translate }}
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+

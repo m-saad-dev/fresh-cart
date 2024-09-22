@@ -1,0 +1,44 @@
+<section class="px-3 py-5 pt-3 rounded-2 text-center mx-auto">
+    <h1 class="h2 text-main mb-4"> Products</h1>
+    @if (products.length != 0) {
+        <div class="row justify-content-center my-4">
+            <div class="col-md-6">
+                <input type="search" class="form-control" [(ngModel)]="searchTerm">
+            </div>
+        </div>
+    }
+    <div class="row g-3 min-vh-100">
+        @for (product of products | ProductSearch : searchTerm; track product.id) {
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                
+                <div class="product position-relative">
+                    <div [routerLink]="['/product-details/', product.id]">
+                        <img  [src]="product.imageCover" class="card-img-top object-fit-cover" alt="...">
+                        <div class="card-body text-start p-3">
+                            <h3 class="h6 text-main"> {{ product.category.name }}</h3>
+                            <h2 class="h5 card-text"> {{ product.title.split(' ', 3).join(' ') }} </h2>
+                            <div class="card-text d-flex justify-content-between align-items-center">
+                                <div>  
+                                    <span> {{ product.price }} EGP </span>
+                                </div>
+                                <div class="pe-2">
+                                    @for (star of [1,2,3,4,5].slice(0, product.ratingsAverage); track $index) {
+                                        <span> <i class="fas fa-star rating-color"></i> </span>
+                                    }
+                                    @if (product.ratingsAverage % 1 !== 0) {
+                                        <span> <i class="fas fa-star-half rating-color"></i> </span>
+                                    }
+                                    <span class="text-muted"> {{ product.ratingsAverage }} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icon position-absolute top-0 end-0 pt-2 pe-2 cursor-pointer" (click)="_ProductService.updateFav(product.id)">
+                        <i class="fa-solid fa-heart" [ngClass]="{'text-danger': isFavProduct(product.id)}"></i>
+                    </div>
+                    <button class="btn-main w-100" (click)="addToCart(product.id)"> Add to Cart </button>
+                </div>
+            </div>
+        }
+    </div>
+</section>

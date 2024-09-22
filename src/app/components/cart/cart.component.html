@@ -1,0 +1,55 @@
+<section class="bg-main-light shadow py-5 px-4 rounded-4 text-center mx-auto w-75">
+    <div class="row">
+        <div class="col-9 col-md-10">
+            <h1 class="h2 text-main mb-2 text-start"> Shop Cart </h1>
+            <h2 class="h5 text-muted ms-4 mb-4 text-start"> Total price: {{ cart.totalCartPrice | currency : 'GBP' }} </h2>
+        </div>
+        <div class="col-3 col-md-2 text-end p-0">
+            @if (cart.products?.length) {
+                <button class="btn btn-outline-danger w-75" (click)="clearCartItems()"> Clear </button>
+            }
+        </div>
+    </div>
+    <div class="row g-3">
+        @for (item of cart.products; track item.id) {
+            <div class="image-cover col-6 col-sm-5 col-lg-4 col-xl-3 col-xxl-2 bg-light rounded-2 shadow-sm">
+                <img  [src]="item.product.imageCover" [alt]="item.product.title" style="max-height:200px; object-fit: cover;">
+            </div>
+            <div class="col-6 col-sm-7 col-lg-8 col-xl-9 col-xxl-10 bg-light rounded-2 shadow-sm p-3">
+                <div class="row justify-content-between align-items-md-center">
+                    <div class="product-details col-12 col-md-8 text-start">
+                        <h3 class="mb-1"> {{ item.product.title | slice : 0 : 2 }} </h3>
+                        <h4 class="h6 fw-light text-muted"> {{ item.product.category.name }} </h4>
+                        <p class="text-main"> {{ item.product.description }} </p>
+                        <p class="text-main"> price: <span class="text-dark">{{ item.price | currency : "GBP" }} </span></p> 
+                        <span class="btn ps-0" (click)="removeItem(item.product.id)">
+                            <i class="fa-solid fa-trash text-main"></i>
+                            <span> Remove  </span>
+                        </span>
+                    </div>
+                    <div class="col-12 col-md-4 ps-0 mt-2 mt-sm-0">
+                        <div class="actions d-flex justify-content-md-center align-items-md-center justify-content-start align-items-start">
+                            <span class="btn" (click)="updateItem(item.product.id, item.count + 1 )"> <i class="fa-solid fa-plus-square fa-2x text-main"></i> </span>
+                            <span class="bg-light-subtle shadow-sm px-2" style="width: 30px; height: 30px; padding-top: 3px;">
+                                {{ item.count }} 
+                            </span>
+                            <span class="btn" (click)="updateItem(item.product.id, item.count - 1 )"> <i class="fa-solid fa-minus-square fa-2x text-main"></i> </span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        } 
+        @empty {
+            <h3 class="text-main"> No Items</h3>
+        }
+        @if (cart.products?.length) {
+            <div class="row mt-4">
+                <div class="col-12">
+                    <button [routerLink]="['/cart/place-order', cart._id]" class="btn btn-main" > Place Order </button>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+  

@@ -1,0 +1,39 @@
+<section class="bg-main-light shadow py-5 px-4 rounded-4 text-center mx-auto w-75">
+    <div class="row">
+        <div class="col-9 col-md-10">
+            <h1 class="h2 text-main mb-2 text-start"> Orders </h1>
+        </div>
+    </div>
+    @for (order of orders; track order.id) {
+        <div class="row mb-4 justify-content-center align-items-center">
+            <div class="col-12 bg-light rounded-2 shadow-sm text-start">
+                <p class="text-main"> price: <span class="text-dark">{{ order.totalOrderPrice | currency : "GBP" }} </span></p> 
+            </div>
+            <div class="col-12 bg-light rounded-2 shadow-sm">
+                @for (cartItem of order.cartItems; track cartItem.id) {
+                    <div>
+                        <div class="row justify-content-center align-items-center mb-2">
+                            <div class="col-6 col-md-2 text-start">
+                                <img  [src]="cartItem.product.imageCover" [alt]="cartItem.product.title" style="max-height:150px; object-fit: cover;">
+                            </div>
+                            <div class="col-6 col-md-10 text-start">
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-8 text-start">
+                                        <h3 class="h5 text-muted"> {{ cartItem.product.title }} </h3>
+                                        <p class="fw-light text-main"> {{ cartItem.product.category.name }} </p>
+                                    </div>
+                                    <div class="col-4 text-start">
+                                        <p class="h6 fw-light text-muted"> {{ cartItem.count }} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    } 
+    @empty {
+        <h3 class="text-main"> No Orders </h3>
+    }
+</section>

@@ -1,0 +1,57 @@
+<section class="bg-main-light shadow py-5 rounded-4 text-center mx-auto w-75">
+    <h1 class="h2 text-main mb-5"> Login Now</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            <div class="col-3 ps-4 ms-4 text-start ">
+                <label for="email" class="text-capitalize"> email:</label>
+            </div>
+            <div class="col-8">
+                <input formControlName="email" type="email" id="email" class="form-control d-inline-block" 
+                [ngClass]="{
+                    'is-valid': loginForm.get('email')?.valid && (loginForm.get('email')?.touched || loginForm.get('email')?.touched),
+                    'is-invalid': loginForm.get('email')?.invalid && (loginForm.get('email')?.touched || loginForm.get('email')?.touched),
+                }">
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="loginForm" controlName="email"></app-form-error-msgs>
+            </div>
+        </div>
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            <div class="col-3 ps-4 ms-4 text-start ">
+                <label for="password" class="text-capitalize"> password:</label>
+            </div>
+            <div class="col-8">
+                <input formControlName="password" type="password" id="password" class="form-control d-inline-block" 
+                [ngClass]="{
+                    'is-valid': loginForm.get('password')?.valid && (loginForm.get('password')?.touched || loginForm.get('password')?.touched),
+                    'is-invalid': loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.touched),
+                }">
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="loginForm" controlName="password"></app-form-error-msgs>
+            </div>
+        </div>
+        <div class="row justify-content-end align-items-center">
+            <div class="col-md-2 offset-5 text-end">
+                <a class="link-primary" routerLink="/forgot-password"> Forgot Password ?!</a>
+            </div>
+            <div class="col-md-2 text-start ">
+                <button type="submit" class="btn-main text-capitalize" [disabled]="isLoading"> 
+                    @if (isLoading) {
+                        <i class="fas fa-spinner fa-spin"></i>
+                    }
+                    @else {
+                        submit
+                    }
+                </button>
+            </div>
+        </div>
+    </form>
+    @if (errMsg) {
+        <div class="row justify-content-center">
+            <div class="alert alert-danger w-50 m-2 p-1">
+                <p class="m-0"> {{ errMsg }}</p>
+            </div>
+        </div>
+    }
+</section>

@@ -1,0 +1,69 @@
+<section class="bg-main-light shadow py-5 rounded-4 text-center mx-auto w-50">
+    <h1 class="h2 text-main mb-5"> Checkout</h1>
+    <form [formGroup]="placeOrderForm" (ngSubmit)="checkout()">
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            <div class="col-2 offset-2 ps-4 text-start ">
+                <label for="details" class="text-capitalize"> details:</label>
+            </div>
+            <div class="col-6">
+                <textarea formControlName="details"  id="detais" class="form-control d-inline-block" rows="5" style="resize: none;"
+                [ngClass]="{
+                    'is-valid': placeOrderForm.get('details')?.valid && (placeOrderForm.get('details')?.touched || placeOrderForm.get('details')?.touched),
+                    'is-invalid': placeOrderForm.get('details')?.invalid && (placeOrderForm.get('details')?.touched || placeOrderForm.get('details')?.touched),
+                }"></textarea>
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="placeOrderForm" controlName="details"></app-form-error-msgs>
+            </div>
+        </div>
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            <div class="col-2 offset-2 ps-4 text-start ">
+                <label for="phone" class="text-capitalize"> phone:</label>
+            </div>
+            <div class="col-6">
+                <input formControlName="phone" type="tel" id="phone" class="form-control d-inline-block" 
+                [ngClass]="{
+                    'is-valid': placeOrderForm.get('phone')?.valid && (placeOrderForm.get('phone')?.touched || placeOrderForm.get('phone')?.touched),
+                    'is-invalid': placeOrderForm.get('phone')?.invalid && (placeOrderForm.get('phone')?.touched || placeOrderForm.get('phone')?.touched),
+                }">
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="placeOrderForm" controlName="phone"></app-form-error-msgs>
+            </div>
+        </div>
+        <div class="row justify-content-start align-items-center mb-5 position-relative">
+            <div class="col-2 offset-2 ps-4 text-start ">
+                <label for="city" class="text-capitalize"> city:</label>
+            </div>
+            <div class="col-6">
+                <input formControlName="city" type="text" id="city" class="form-control d-inline-block" 
+                [ngClass]="{
+                    'is-valid': placeOrderForm.get('city')?.valid && (placeOrderForm.get('city')?.touched || placeOrderForm.get('city')?.touched),
+                    'is-invalid': placeOrderForm.get('city')?.invalid && (placeOrderForm.get('city')?.touched || placeOrderForm.get('city')?.touched),
+                }">
+            </div>
+            <div class="col-8 offset-3">
+                <app-form-error-msgs [form]="placeOrderForm" controlName="city"></app-form-error-msgs>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-2 text-start ">
+                <button type="submit" class="btn-main text-capitalize"  [disabled]="isLoading"> 
+                    @if (isLoading) {
+                        <i class="fas fa-spinner fa-spin"></i>
+                    }
+                    @else {
+                        checkout
+                    }
+                </button>
+            </div>
+        </div>
+    </form>
+    @if (errMsg) {
+        <div class="row justify-content-center">
+            <div class="alert alert-danger w-50 m-2 p-1">
+                <p class="m-0"> {{ errMsg }}</p>
+            </div>
+        </div>
+    }
+</section>

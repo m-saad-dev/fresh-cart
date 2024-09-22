@@ -1,0 +1,20 @@
+@if (form.get(controlName)?.errors && (form.get(controlName)?.touched  || form.get(controlName)?.dirty )) {
+    @for (error of inputsErrorsMsgs; track $index) {
+        @if ( form.get(controlName)?.getError(error.errorName)) {
+            <div class="invalid-tooltip d-block ms-4">
+                {{ controlName.slice(0, 1).toUpperCase() + controlName.slice(1) + ' ' + error.msg }}
+                @if (error.minlength) {
+                    {{ ' ' + error.minlength }}
+                } @else if(error.maxlength) {
+                    {{ ' ' + error.maxlength }}
+                } 
+                .
+            </div>
+        }
+    }
+} 
+@else if(form.errors && (form.get('rePassword')?.touched || form.get('rePassword')?.dirty)){
+    <div class="invalid-tooltip d-block ms-4">
+        Password and rePassword not matching.
+    </div>
+}
