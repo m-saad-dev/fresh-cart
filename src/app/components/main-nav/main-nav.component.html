@@ -59,7 +59,7 @@
                 <li class="nav-item me-2">
                     <a class="nav-link p-2 px-3 text-uppercase cursor-pointer position-relative" target="_self" routerLink="/fav-products">
                         <i class="fa-solid fa-heart" [ngClass]="{ 'text-danger': this._ProductService.favProductsCount()}"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" [ngClass]="{ 'bg-danger': this._ProductService.favProductsCount()}">
                             {{ this._ProductService.favProductsCount() }}
                         </span>
                     </a>
@@ -67,7 +67,7 @@
                 <li class="nav-item me-2">
                     <a class="nav-link p-2 text-uppercase position-relative" target="_self" routerLink="/cart">
                         <i class="fa-solid fa-cart-shopping" [ngClass]="{'text-success': this._CartService.cartItemsCount()}"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" [ngClass]="{'bg-success': this._CartService.cartItemsCount()}">
                             {{ this._CartService.cartItemsCount() }}
                         </span>
                     </a>
