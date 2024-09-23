@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProjectTranslateService } from '../../core/services/project-translate.service';
 import { NgClass } from '@angular/common';
 import { CartService } from '../../core/services/cart.service';
+import { ProductService } from '../../core/services/product.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -17,19 +18,12 @@ export class MainNavComponent {
   protected readonly _AuthService = inject(AuthService);
   protected readonly _ProjectTranslateService = inject(ProjectTranslateService);
   protected readonly _CartService = inject(CartService);
+  protected readonly _ProductService = inject(ProductService);
   ngOnInit(): void {
     this._CartService.getCartItems().subscribe({
       next: (res) => {this._CartService.cartItemsCount.set(res.numOfCartItems)}
     });
-
-    // this.getCartItemsNum();
   }
-  // getCartItemsNum()
-  // {
-  //   this._CartService.cartItemsCount.subscribe({
-  //     next: () => {}
-  //   })
-  // }
   getCurrentLang():string
   {
     return this._ProjectTranslateService.getCurrentLang();
@@ -37,4 +31,5 @@ export class MainNavComponent {
   updateLang(lang:string){
     this._ProjectTranslateService.updateLang(lang)
   }
+
 }

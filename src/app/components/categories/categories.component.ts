@@ -24,7 +24,6 @@ export class CategoriesComponent {
       next: (res) => {
         this._CategoryService.categories.set(res.data)
       }
-      
     });
   }
   getCategories():void
@@ -33,7 +32,6 @@ export class CategoriesComponent {
       next: (res) => {
         this._CategoryService.categories.set(res.data)
       }
-      
     });
   }
   

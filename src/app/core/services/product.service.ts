@@ -33,7 +33,6 @@ export class ProductService {
       } else {
         favs.splice(index, 1);
       }
-      
       localStorage.setItem('fav-products', JSON.stringify(favs));
     }  else {
       localStorage.setItem('fav-products', JSON.stringify([productId]));
@@ -46,6 +45,15 @@ export class ProductService {
       return favs.includes(productId);
     } else {
       return false
+    }
+  }
+  favProductsCount(): number
+  {
+    if(isPlatformBrowser(this._PLATFORM_ID) && localStorage.getItem('fav-products')){
+      let favs = JSON.parse(localStorage.getItem('fav-products')!);
+      return favs.length;
+    } else {
+      return 0;
     }
   }
 }

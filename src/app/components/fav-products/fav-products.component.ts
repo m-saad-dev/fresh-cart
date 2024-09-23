@@ -24,17 +24,20 @@ export class FavProductsComponent {
   private readonly _PLATFORM_ID = inject(PLATFORM_ID);
   protected productsSubscription!:Subscription;
   protected addToCartSubscription!:Subscription;
-
-
   protected searchTerm:string = "";
+  
   ngOnInit(): void {
     if(isPlatformBrowser(this._PLATFORM_ID) && localStorage.getItem('fav-products'))
-    this._ProductService.getAllProducts().subscribe({
+    this.productsSubscription = this._ProductService.getAllProducts().subscribe({
       next: (res) => {
         this.favProducts = res.data.filter((product:Product) => JSON.parse(localStorage.getItem('fav-products')!).includes(product.id))
+        console.log(2222222, this.favProducts);
         
       }
     });
+    setTimeout(()=>{
+      this.productsSubscription.unsubscribe();
+    }, 5000);
   }
   remove(productId:string)
   {
@@ -54,6 +57,6 @@ export class FavProductsComponent {
     });
     setTimeout(()=>{
       this.addToCartSubscription.unsubscribe();
-    }, 1000);
+    }, 5000);
   }
 }

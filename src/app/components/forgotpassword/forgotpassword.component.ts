@@ -59,7 +59,6 @@ export class ForgotpasswordComponent {
         this.step = 3;
         this.isLoading = false;
         this.errMsg = "";
-        
         this.resetEmailValue = this.verifyEmailForm.controls.email.value || "";
       },
       error: (err) => {

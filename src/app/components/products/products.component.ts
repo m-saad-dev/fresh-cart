@@ -39,7 +39,7 @@ export class ProductsComponent implements OnInit {
     })
     setTimeout(()=>{
       this.addToCartSubscription.unsubscribe();
-    }, 1000);
+    }, 5000);
   }
   updateFav(productId:string)
   {
